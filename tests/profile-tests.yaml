@@ -1,0 +1,120 @@
+# Profile Test Cases for amplifier-dev collection
+#
+# Run these manually:
+#   amplifier run --profile amplifier-dev:amplifier-dev "{prompt}"
+#
+# Or when profile-comparison orchestrator exists:
+#   amplifier compare --profile amplifier-dev:amplifier-dev --test-suite ./tests/profile-tests.yaml
+
+name: "Amplifier Dev Collection Tests"
+description: "Validates the amplifier-dev profile behaves as expected"
+
+defaults:
+  timeout_ms: 60000
+  profile: amplifier-dev:amplifier-dev
+
+test_cases:
+  # === Contract Knowledge ===
+  - id: tool-contract-fetch
+    prompt: "What is the Tool contract? Show me the required interface."
+    tags: [contracts, tool, webfetch]
+    expected_behavior: |
+      - Should fetch from GitHub (tool-web)
+      - Should show the Tool protocol with name, description, execute()
+      - Should mention ToolResult return type
+      - Should cite the source URL
+
+  - id: provider-contract-fetch
+    prompt: "Explain the Provider contract briefly."
+    tags: [contracts, provider, webfetch]
+    expected_behavior: |
+      - Should fetch from GitHub
+      - Should mention complete(), parse_tool_calls(), list_models()
+      - Should mention ChatRequest/ChatResponse
+
+  - id: hook-contract-fetch
+    prompt: "What events can a Hook respond to?"
+    tags: [contracts, hook, webfetch]
+    expected_behavior: |
+      - Should list standard events (session:start, tool:pre, etc.)
+      - Should explain HookResult actions (continue, block, skip)
+
+  # === Module Creation ===
+  - id: scaffold-tool
+    prompt: "Help me create a new tool called 'weather' that fetches weather data."
+    tags: [module-author, scaffolding]
+    expected_behavior: |
+      - Should provide directory structure
+      - Should show pyproject.toml with entry point
+      - Should show __init__.py with mount() function
+      - Should implement Tool protocol (name, description, execute)
+
+  - id: scaffold-provider
+    prompt: "What files do I need to create a new LLM provider?"
+    tags: [module-author, scaffolding]
+    expected_behavior: |
+      - Should list required files (pyproject.toml, __init__.py)
+      - Should mention the 5 required Provider methods
+      - Should mention graceful degradation pattern
+
+  # === Profile Design ===
+  - id: design-profile
+    prompt: "Help me design a profile for code review that only has read access."
+    tags: [profile-designer]
+    expected_behavior: |
+      - Should suggest extending base profile
+      - Should show how to include tool-filesystem
+      - Should show how to exclude tool-bash or limit tools
+      - Should provide YAML example
+
+  - id: explain-inheritance
+    prompt: "How does profile inheritance work with extends?"
+    tags: [profile-designer, concepts]
+    expected_behavior: |
+      - Should explain the inheritance chain
+      - Should mention how modules merge
+      - Should mention exclude: for removing inherited modules
+
+  # === Architecture Understanding ===
+  - id: explain-kernel
+    prompt: "What is the kernel philosophy in Amplifier?"
+    tags: [amplifier-explainer, philosophy]
+    expected_behavior: |
+      - Should mention "mechanisms, not policies"
+      - Should explain that kernel is minimal (~2600 lines)
+      - Should explain that policies live in modules
+
+  - id: explain-mount
+    prompt: "What is a mount plan?"
+    tags: [amplifier-explainer, architecture]
+    expected_behavior: |
+      - Should explain it's the contract between app and kernel
+      - Should mention it contains providers, tools, hooks config
+      - Should mention profiles get resolved into mount plans
+
+  # === Fallback Behavior ===
+  - id: offline-fallback
+    prompt: "What is the Tool contract?"
+    tags: [contracts, fallback]
+    conditions:
+      network: disabled  # Manual: disconnect network before running
+    expected_behavior: |
+      - Should use embedded summary from context/contracts/
+      - Should still provide accurate information
+      - May mention that this is a summary/fallback
+
+  # === Edge Cases ===
+  - id: unknown-module-type
+    prompt: "How do I create a 'validator' module?"
+    tags: [edge-case]
+    expected_behavior: |
+      - Should clarify that 'validator' isn't a standard module type
+      - Should list the 5 standard types (provider, tool, hook, orchestrator, context)
+      - Should ask for clarification or suggest closest match
+
+  - id: ambiguous-request
+    prompt: "How do I add something to Amplifier?"
+    tags: [edge-case, ambiguous]
+    expected_behavior: |
+      - Should ask for clarification
+      - Should list options (module, profile, collection, context)

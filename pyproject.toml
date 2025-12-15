@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "amplifier-collection-amplifier-dev"
+version = "2.0.0"
+description = "Collection for developing Amplifier modules, profiles, and collections with systematic thinking patterns"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.amplifier.collection]
+author = "Microsoft Amplifier Team"
+capabilities = [
+    "module-development",
+    "profile-design",
+    "collection-authoring",
+    "amplifier-internals",
+    "systematic-thinking",
+    "evidence-driven-reasoning",
+    "session-debugging"
+]
+agents = [
+    { name = "module-author", path = "agents/module-author.md" },
+    { name = "profile-designer", path = "agents/profile-designer.md" },
+    { name = "amplifier-explainer", path = "agents/amplifier-explainer.md" },
+    { name = "session-debugger", path = "agents/session-debugger.md" }
+]
+dependencies = [
+    "foundation",
+    "developer-expertise"
+]
