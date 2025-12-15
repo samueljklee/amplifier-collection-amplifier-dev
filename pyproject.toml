@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amplifier-collection-amplifier-dev"
-version = "2.0.0"
+version = "3.0.0"
 description = "Collection for developing Amplifier modules, profiles, and collections with systematic thinking patterns"
 requires-python = ">=3.11"
 license = { text = "MIT" }

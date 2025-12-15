@@ -1,8 +1,8 @@
 ---
 profile:
-  name: sam
+  name: reasoning-dev-openai
   version: 2.0.0
-  description: Evidence-driven problem solving with systematic reasoning patterns
+  description: Evidence-driven problem solving with systematic reasoning patterns (OpenAI-powered)
   extends: developer-expertise:profiles/dev.md
 
 session:
@@ -11,12 +11,12 @@ session:
       extended_thinking: true
 
 providers:
-  - module: provider-anthropic
+  - module: provider-openai
     config:
-      beta_headers: "context-1m-2025-08-07"
+      model: gpt-5.2-chat-latest
       debug: true
       raw_debug: true
-      priority: 100
+      priority: 90
 
 task:
   max_recursion_depth: 2
