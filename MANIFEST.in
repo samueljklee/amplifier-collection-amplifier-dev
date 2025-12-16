@@ -1,0 +1,9 @@
+# Include metadata files
+include README.md
+include pyproject.toml
+
+# Include all collection data
+recursive-include agents *.md
+recursive-include context *.md
+recursive-include profiles *.md
+recursive-include tests *.md *.yaml
