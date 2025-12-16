@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "amplifier-collection-amplifier-dev"
-version = "3.0.0"
+version = "1.0.0"
 description = "Collection for developing Amplifier modules, profiles, and collections with systematic thinking patterns"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -17,7 +17,7 @@ authors = [
 packages = {find = {}}
 
 [tool.setuptools.package-data]
-amplifier_collection_amplifier_dev = ["*.toml"]
+amplifier_collection_amplifier_dev = ["*.toml", "**/*.md"]
 
 [tool.amplifier.collection]
 author = "Microsoft Amplifier Team"

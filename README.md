@@ -16,17 +16,17 @@ A collection for building Amplifier modules, profiles, and collections with syst
 ```bash
 amplifier collection add file:///path/to/amplifier-collection-amplifier-dev
 # or
-amplifier collection add git+https://github.com/microsoft/amplifier-collection-amplifier-dev@main
+amplifier collection add git+https://github.com/samueljklee/amplifier-collection-amplifier-dev@main
 ```
 
 ## Usage
 
 ```bash
 # Use the amplifier-builder profile (recommended for development)
-amplifier profile use amplifier-dev:amplifier-builder
+amplifier profile use amplifier-collection-amplifier-dev:amplifier-builder
 
-# Or use amplifier-dev for quick reference questions
-amplifier profile use amplifier-dev:amplifier-dev
+# Or use amplifier-dev in for a given session
+amplifier run --profile amplifier-collection-amplifier-dev:amplifier-builder --mode chat
 
 # Ask questions about Amplifier internals
 amplifier> "How do I create a new tool module?"
@@ -40,10 +40,9 @@ amplifier> "Help me design a profile for code review"
 
 | Profile | Purpose | When to Use |
 |---------|---------|-------------|
-| **amplifier-dev** | Amplifier domain knowledge | Learning internals, understanding contracts, quick reference |
+| **amplifier-builder** | Combined: domain + reasoning | **Building Amplifier modules** (recommended for development) |
 | **reasoning-dev** | Systematic reasoning patterns | Complex debugging, evidence-driven investigation (any project) |
 | **reasoning-dev-openai** | Reasoning with OpenAI | Same as reasoning-dev, uses OpenAI provider |
-| **amplifier-builder** | Combined: domain + reasoning | **Building Amplifier modules** (recommended for development) |
 
 ### Agents
 
@@ -86,20 +85,17 @@ Add to `.amplifier/settings.yaml`:
 
 ```yaml
 collection_sources:
-  amplifier-dev: ./amplifier-collection-amplifier-dev
+  amplifier-collection-amplifier-dev: ./amplifier-collection-amplifier-dev
 ```
 
 ### 2. Run the profiles
 
 ```bash
 # Use amplifier-builder for full development capabilities
-amplifier run --profile amplifier-dev:amplifier-builder "Build me a weather tool"
-
-# Or use amplifier-dev for quick questions
-amplifier run --profile amplifier-dev:amplifier-dev "How do I create a new tool?"
+amplifier run --profile amplifier-collection-amplifier-dev:amplifier-builder "Build me a weather tool"
 
 # Or use reasoning-dev for systematic debugging (any project)
-amplifier run --profile amplifier-dev:reasoning-dev "Debug this complex issue..."
+amplifier run --profile amplifier-collection-amplifier-dev:reasoning-dev "Debug this complex issue..."
 ```
 
 ### 3. Run test cases
@@ -108,10 +104,10 @@ See `tests/README.md` for the full test suite. Quick smoke test:
 
 ```bash
 # Test contract fetching (should use tool-web)
-amplifier run --profile amplifier-dev:amplifier-builder \
+amplifier run --profile amplifier-collection-amplifier-dev:amplifier-builder \
   "What is the Tool contract? Show me the required interface."
 
 # Test module scaffolding with systematic reasoning
-amplifier run --profile amplifier-dev:amplifier-builder \
+amplifier run --profile amplifier-collection-amplifier-dev:amplifier-builder \
   "Help me create a tool that fetches weather data."
 ```
