@@ -2,8 +2,7 @@
 include README.md
 include pyproject.toml
 
-# Include all collection data
-recursive-include agents *.md
-recursive-include context *.md
-recursive-include profiles *.md
+# Include all collection data inside package
+recursive-include amplifier_collection_amplifier_dev *.md
+recursive-include amplifier_collection_amplifier_dev *.toml
 recursive-include tests *.md *.yaml

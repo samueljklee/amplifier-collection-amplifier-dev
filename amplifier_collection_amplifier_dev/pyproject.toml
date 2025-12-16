@@ -17,7 +17,7 @@ authors = [
 packages = {find = {}}
 
 [tool.setuptools.package-data]
-amplifier_collection_amplifier_dev = ["*.toml", "**/*.md"]
+amplifier_collection_amplifier_dev = ["*.toml"]
 
 [tool.amplifier.collection]
 author = "Microsoft Amplifier Team"
