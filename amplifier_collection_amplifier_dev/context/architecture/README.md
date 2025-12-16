@@ -11,6 +11,8 @@ The profile instructs the agent to:
 
 ## GitHub URLs (Authoritative Source)
 
+### Module Contracts & Core Docs
+
 Base: `https://raw.githubusercontent.com/microsoft/amplifier-core/main/docs/`
 
 | Document | Path |
@@ -23,6 +25,16 @@ Base: `https://raw.githubusercontent.com/microsoft/amplifier-core/main/docs/`
 | DESIGN_PHILOSOPHY.md | `DESIGN_PHILOSOPHY.md` |
 | MODULE_SOURCE_PROTOCOL.md | `MODULE_SOURCE_PROTOCOL.md` |
 | MOUNT_PLAN_SPECIFICATION.md | `specs/MOUNT_PLAN_SPECIFICATION.md` |
+
+### Collection Specifications
+
+Base: `https://github.com/microsoft/amplifier-collections/blob/main/docs/`
+
+| Document | Purpose |
+|----------|---------|
+| SPECIFICATION.md | Collection format, packaging structure, pyproject.toml schema |
+| AUTHORING.md | Guide for creating new collections |
+| USER_GUIDE.md | Installing and using collections |
 
 ## Philosophy Docs
 

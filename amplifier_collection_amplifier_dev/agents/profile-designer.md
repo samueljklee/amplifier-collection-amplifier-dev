@@ -211,24 +211,41 @@ providers:
 - Bundles related profiles + agents + context
 - Shareable with team or community
 
-### Collection Structure
+### Authoritative Source
+
+**Collection Format Specification**: https://github.com/microsoft/amplifier-collections/blob/main/docs/SPECIFICATION.md
+
+When designing collections, use `tool-web` to fetch the specification for:
+- Correct directory structure for pip/uv installation
+- Required files (pyproject.toml, MANIFEST.in, __init__.py)
+- Package naming conventions (hyphens → underscores)
+- Resource discovery patterns
+
+### Collection Structure (Correct for pip/uv)
+
+**Critical**: Resources must be inside the package directory, not at repository root.
+
 ```
-my-collection/
-├── profiles/
-│   ├── main.md          # Primary profile
-│   └── lightweight.md   # Minimal variant
-├── agents/
-│   ├── specialist-1.md
-│   └── specialist-2.md
-├── context/
-│   ├── domain-knowledge.md
-│   ├── best-practices.md
-│   └── templates/
-│       └── template-1.md
-├── modules/             # Optional: custom modules
-│   └── tool-custom/
-├── pyproject.toml
-└── README.md
+my-collection/                      # Repository root
+├── pyproject.toml                  # Build configuration
+├── MANIFEST.in                     # Include package resources
+├── README.md
+└── my_collection/                  # Package directory (underscores!)
+    ├── __init__.py
+    ├── pyproject.toml              # Copy for runtime metadata
+    ├── profiles/                   # Resources INSIDE package
+    │   ├── main.md
+    │   └── lightweight.md
+    ├── agents/
+    │   ├── specialist-1.md
+    │   └── specialist-2.md
+    ├── context/
+    │   ├── domain-knowledge.md
+    │   ├── best-practices.md
+    │   └── templates/
+    │       └── template-1.md
+    └── modules/                    # Optional: custom modules
+        └── tool-custom/
 ```
 
 ### pyproject.toml
